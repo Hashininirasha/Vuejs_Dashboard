@@ -1,4 +1,4 @@
-<!-- Card.vue -->
+
 <template>
   <div class="card">
     <h2>{{ title }}</h2>

@@ -1,217 +1,151 @@
 <template>
-  <div>
-
-    <v-table
-    :data="users"
-        :currentPage.sync="currentPage"
-        :pageSize="5"
-        @totalPagesChanged="totalPages = $event"
-
-
-      class="Table-style"
-    >  
-    <thead>
-        <h2 class="heading-style">All Customers</h2>
-    </thead>
-
-    <div class="table-heading">
-  <thead>
-    <div class="flex-container">
+  <v-data-table
+    v-model:expanded="expanded"
+    :headers="dessertHeaders"
+    :items="desserts"
+    item-value="customerName"
+    show-expand
+    class="rounded-table"
+  >
+    <template v-slot:top>
+      <h2 class="heading-style">All Customers</h2>
       <p class="active-members">Active Members</p>
-      
-      <!-- <v-text-field
-        v-model="searchQuery"
-        variant="underlined"
-        @input="filterItems"
-        placeholder="Search..."
-        class="search-field"
-      >
-        <i class="bx bx-search-alt-2" slot="prepend"></i>
-      </v-text-field>
+    </template>
 
-      <v-select
-        v-model="selectedOption"
-        :items="options"
-        label="Sort by:"
-        variant="underlined"
-        append-icon="bx bxs-chevron-down"
-      ></v-select> -->
-    </div>
-  </thead>
-</div>
 
-    
-      <thead>
-        <tr class="heading">
-          <th class="text-left">
-            Customer Name
-          </th>
-          <th class="text-left">
-            Company
-          </th>
-          <th class="text-left">
-            Phone Number
-          </th>
-          <th class="text-left">
-            Email
-          </th>
-          <th class="text-left">
-            Country
-          </th>
-          <th class="text-left">
-            Status
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="item in desserts"
-          :key="item.name"
-        >
-          <td>{{ item.customerName }}</td>
-          <td>{{ item.company }}</td>
-          <td>{{ item.phoneNumber }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.country }}</td>
-          <td>
-            <button class="status-btn" v-bind:status="item.status">
-            {{ item.status }}
-            </button>
-            </td>
-        </tr>
-       
-      </tbody>
-  <tr >
-    <td colspan="3" class="pagination-text">Showing Data 1 to 8 of 255 entities</td>
-    <td colspan="3" class="pagination"><pagination/></td>
-  </tr>
-    </v-table>
+    <template v-slot:expanded-row="{ item }">
+      <tr  class="address-set">
+        <td></td>
+        <td>Address 1</td>
+        <td>
+        
+          <div>
+            <p>{{ item.address1.number  }}</p>
+          </div>
+          
+        </td>
 
-      
-  </div>
+        <td>
+        
+          <div>
+            <p>{{ item.address1.street}}</p>
+          </div>
+          
+        </td>
 
+        <td>
+        
+          <div>
+            <p>{{ item.address1.city }}</p>
+          </div>
+          
+        </td>
+      </tr>
+
+      <tr class="address-set">
+        <td></td>
+        <td>Address 2</td>
+        <td>
+        
+          <div>
+            <p>{{ item.address2.number2 }}</p>
+          </div>
+          
+        </td>
+
+        <td>
+        
+          <div>
+            <p>{{ item.address2.street2}}</p>
+          </div>
+          
+        </td>
+
+        <td>
+        
+          <div>
+            <p>{{ item.address2.city2 }}</p>
+          </div>
+          
+        </td>
+      </tr>
+    </template>
+  </v-data-table>
 </template>
 
+
 <script>
-import Pagination from "./Pagination.vue"
 export default {
-    components: { Pagination },
   data() {
     return {
-      options: ["Option 1", "Option 2", "Option 3"],
-      page: 1,
-      desserts: [
+      expanded: [],
+      dessertHeaders: [
         {
-          customerName: 'John Doe',
-          company: 'ABC Inc.',
-          phoneNumber: '123-456-7890',
-          email: 'john.doe@example.com',
-          country: 'USA',
-          status: 'Active',
+          title: 'CustomerName',
+          align: 'start',
+          sortable: false,
+          key: 'name',
         },
-        {
-          customerName: 'John Doe',
-          company: 'ABC Inc.',
-          phoneNumber: '123-456-7890',
-          email: 'john.doe@example.com',
-          country: 'USA',
-          status: 'Inactive',
-        },
-        {
-          customerName: 'John Doe',
-          company: 'ABC Inc.',
-          phoneNumber: '123-456-7890',
-          email: 'john.doe@example.com',
-          country: 'USA',
-          status: 'Active',
-        },
-        // Add more data objects as needed
+        { title: 'Company', key: 'company' },
+        { title: 'PhoneNumber', key: 'phoneNumber' },
+        { title: 'Email', key: 'email' },
+        { title: 'Country', key: 'country' },
+        { title: 'Status', key: 'status', class: 'status-column', style: 'color: red;', value: 'status' },
+        { title: '', key: 'data-table-expand' },
       ],
- itemsPerPage: 5, // Adjust as needed
-      currentPage: 1,
+      desserts: [],
     };
   },
-  computed: {
-    paginatedDesserts() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      return this.desserts.slice(start, end);
-    },
-    totalPages() {
-      return Math.ceil(this.desserts.length / this.itemsPerPage);
-    },
-  },
-  methods: {
-    changePage(value) {
-      this.currentPage = value;
-    },
-  },
+ created() {
+  const storedCustomers = localStorage.getItem('customers');
+  if (storedCustomers) {
+    this.desserts = JSON.parse(storedCustomers).map(customer => ({
+      ...customer,
+      status: customer.status || 'Active', // Set 'Active' if status is not provided
+    }));
+  }
+},
+
 };
 </script>
 
+
+
 <style scoped>
-.search-field{
-  padding-left: 100px
-}
-.flex-container {
-  display: flex;
-  align-items: center;
-}
-
-
-.pagination{
-  padding-left: 50px
-}
-.pagination-text{
-  padding-left: 20px;
+.address-set{
   color: darkgray;
-
-
 }
-.status-btn {
-  width: 80px;
-  height: 30px;
-  
-  border-radius: 5px;
+.status-column{
+  color: #4CAF50;
+  margin-left: 50px
 }
-
-.status-btn[status="Active"] {
-  background-color: #daf8e1;
-  border: 2px solid #4CAF50;
-  color: #4CAF50
+.active-status {
+  color: red; /* Set your desired style for the active status */
 }
 
-.status-btn[status="Inactive"] {
-  color: red;
-  background-color: #eac0ba;
-   border: 2px solid red;
+.inactive-status {
+  color: green; /* Set your desired style for the inactive status */
 }
 
-
-
-
-.Table-style {
-  margin: 60px;
+.rounded-table {
   border-radius: 10px;
-  height: 500px;
+  margin-left: 60px;
+  margin-top: 40px;
+  width: 90%;
 }
-
-  .pagination-style {
-    display: flex;
-    justify-content: flex-end; /* Align to the right */
-    margin-top: 20px; /* Adjust margin as needed */
-  }
 
 .heading-style {
   margin: 15px;
   font-size: 1.5em;
 }
-.active-members{
-    color: #4CAF50;
-    margin-left: 15px;
- 
+
+.active-members {
+  color: #4CAF50;
+  margin-left: 15px;
 }
-.heading{
-    color:darkgray
+
+.expanded-row {
+  border: 1px solid #ccc; /* Add a border around the expanded row */
+  padding: 10px;
 }
 </style>

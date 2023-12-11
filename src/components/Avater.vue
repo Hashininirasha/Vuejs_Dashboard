@@ -25,8 +25,8 @@ export default {
 
 <style>
 .img-avatar {
-  width: 50px; /* Adjust the size as needed */
-  height: 50px; /* Adjust the size as needed */
+  width: 50px; 
+  height: 50px; 
   border-radius: 50%;
   border: 3px solid #fff;
 }

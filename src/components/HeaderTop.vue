@@ -341,8 +341,8 @@
     margin: 0 10px 0 10px;
   }
   .sidebar {
-    position: relative;
-    display: flex !important;
+    /* position: relative;
+    display: flex !important; */
     flex-direction: column;
     position: fixed;
     left: 0;
@@ -619,24 +619,14 @@
   }
   #my-scroll::-webkit-scrollbar {
     display: none;
-    /* background-color: rgba(255, 255, 255, 0.2); 
-    width: 10px;
-    border-radius:5px  */
+    
+
   }
    .sidebar li.customer-tab a,
   .sidebar li.customer-tab router-link {
-    background: blue; /* Set the background color to blue for the "Customer" tab */
+    background: blue; 
   }
-  /* #my-scroll::-webkit-scrollbar-thumb{
-    background-color: red;
-    border-radius:5px 
-  }
-  #my-scroll::-webkit-scrollbar-button:vertical:start:decrement{
-    display:none;
-  }
-  #my-scroll::-webkit-scrollbar-button:vertical:end:increment{
-    display:none;
-  } */
+
   @media (max-width: 420px) {
     .sidebar li .tooltip {
       display: none;

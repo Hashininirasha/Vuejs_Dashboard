@@ -22,7 +22,6 @@
           </div>
                   <div class="vertical-line"></div>
         </div>
-        <!-- Add a vertical line between cards -->
 
 
         <div class="card">
@@ -62,12 +61,14 @@
         </div>
       </div>
     </div>
+    <Testing/>
   </div>
 </template>
 
 <script>
 import ButtonComponent from "../components/ButtonComponent.vue"
 import Avater from "../components/Avater.vue"
+
 export default {
   components: { ButtonComponent, Avater },
   methods: {
@@ -120,15 +121,13 @@ export default {
 }
 
 .card {
-  /* Optional: Adjust card styles as needed */
   flex: 1;
 
 }
 
 .vertical-line {
-  /* Optional: Adjust vertical line styles as needed */
   border-left: 1px solid #ccc;
-  height: 100px; /* Adjust as needed */
+  height: 100px;
   margin-top: 50px
 }
 
@@ -154,24 +153,24 @@ export default {
 }
 .icon-circle {
   display: inline-block;
-  width: 80px; /* Adjust the size of the circle as needed */
-  height: 80px; /* Adjust the size of the circle as needed */
-  background-color: #daf8e1; /* Green color */
+  width: 80px;
+  height: 80px; 
+  background-color: #daf8e1; 
   border-radius: 50%;
   text-align: center;
-  line-height: 40px; /* Adjust the line height to center the icon */
+  line-height: 40px;
   margin-left: 20px;
 }
 
 .icon-circle i {
-  color: #fff; /* Set the color of the icon within the circle */
+  color: #fff; 
 }
 .con-position{
   margin-right: 10px;
 }
 .icon-position i {
   font-size: 50px;
-  color: #4CAF50; /* Set the color of the icon within the circle */
+  color: #4CAF50; 
   margin-top: 18px
 }
 .card-topic{
@@ -182,13 +181,13 @@ export default {
   color: #4CAF50;
   font-size: 35px;
   display: inline-block;
-  width: 40px; /* Adjust the size of the circle as needed */
-  height: 80px; /* Adjust the size of the circle as needed */
-  background-color: #daf8e1; /* Green color */
+  width: 40px; 
+  height: 80px;
+  background-color: #daf8e1; 
   border-radius: 50%;
   text-align: center;
-  line-height: 35px; /* Adjust the line height to center the icon */
-  margin-left: 80%; /* Use percentage for responsiveness */
+  line-height: 35px; 
+  margin-left: 80%; 
   border: 2px solid #4CAF50;
 }
 
