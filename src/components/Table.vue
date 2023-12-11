@@ -10,6 +10,11 @@
     <template v-slot:top>
       <h2 class="heading-style">All Customers</h2>
       <p class="active-members">Active Members</p>
+
+
+
+
+
     </template>
 
 
@@ -112,6 +117,9 @@ export default {
 
 
 <style scoped>
+.search-style{
+  width: 15%;
+}
 .address-set{
   color: darkgray;
 }
