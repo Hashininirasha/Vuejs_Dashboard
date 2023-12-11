@@ -132,7 +132,7 @@
   export default {
     name: 'SidebarMenu',
     props: {
-      //! Menu settings
+     
       isMenuOpen: {
         type: Boolean,
         default: true,

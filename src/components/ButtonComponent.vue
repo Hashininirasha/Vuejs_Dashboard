@@ -159,7 +159,6 @@ export default {
     }
   },
  closeModal() {
-    // Close the modal or form by setting isModalOpen to false
     this.isModalOpen = false;
   },
 

@@ -5,13 +5,13 @@
     </div>
     <div class="card-section">
       <div class="card-container">
-        <div class="card">
+        <div class="card section1">
           <div class="card-title">
             <div class="icon-circle">
               <h2 class="icon-position"><i class="bx bx-user"></i></h2>
             </div>
           </div>
-          <div class="card-content">
+          <div class="card-content1">
             <p class="card-topic">Total Customers</p>
             <h2>5,425</h2>
             <div class="presentage-margin">
@@ -24,7 +24,7 @@
         </div>
 
 
-        <div class="card">
+        <div class="card section3">
           <div class="card-title">
             <div class="icon-circle">
               <h2 class="icon-position"><i class="bx bx-user-check"></i></h2>
@@ -42,7 +42,7 @@
         </div>
 
 
-        <div class="card">
+        <div class="card section3">
           <div class="card-title">
             <div class="icon-circle">
               <h2 class="icon-position"><i class="bx bx-desktop"></i></h2>
@@ -87,6 +87,16 @@ export default {
 
 
 <style scoped>
+.section3{
+    border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  
+}
+.section1 {
+    border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  
+}
 .inline-text-presentatge-green {
   display: inline;
   color: green;
@@ -117,6 +127,7 @@ export default {
 }
 .card-container {
   display: flex;
+  
   width: 100%;
 }
 
@@ -194,15 +205,19 @@ export default {
 .inline-text-presentatge{
   display: inline;
 }
-/* Media query for small screens */
+
 @media only screen and (max-width: 600px) {
   .title {
     margin-left: 5%;
   }
 
   .card-section {
-    margin-left: 5%;
+    margin-left: 25%;
     margin-right: 5%;
+  }
+
+  .card-container {
+    flex-direction: column; 
   }
 }
 </style>

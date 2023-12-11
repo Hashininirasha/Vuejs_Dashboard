@@ -3,7 +3,7 @@
     v-model:expanded="expanded"
     :headers="dessertHeaders"
     :items="desserts"
-    item-value="customerName"
+    item-value="name"
     show-expand
     class="rounded-table"
   >
@@ -101,7 +101,7 @@ export default {
   if (storedCustomers) {
     this.desserts = JSON.parse(storedCustomers).map(customer => ({
       ...customer,
-      status: customer.status || 'Active', // Set 'Active' if status is not provided
+      status: customer.status || 'Active', 
     }));
   }
 },
@@ -120,11 +120,11 @@ export default {
   margin-left: 50px
 }
 .active-status {
-  color: red; /* Set your desired style for the active status */
+  color: red; 
 }
 
 .inactive-status {
-  color: green; /* Set your desired style for the inactive status */
+  color: green; 
 }
 
 .rounded-table {
@@ -145,7 +145,7 @@ export default {
 }
 
 .expanded-row {
-  border: 1px solid #ccc; /* Add a border around the expanded row */
+  border: 1px solid #ccc; 
   padding: 10px;
 }
 </style>
